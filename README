@@ -1,4 +1,4 @@
 Asset Management / Inventory application for network gear
-- MySQL database
-- Python/Flask backend
-- React frontent
+- MySQL (compatible) database
+- Python3/Flask backend
+- React frontend

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/inventory.css" type="text/css">
+        {% endblock %}
+    </head>
+    <body>
+        <div class="sidebar">
+            <a href="/">Home</a>
+            <a href="/attribute">Attributes</a>
+            <a href="/class">Classes</a>
+            <a href="/device">Devices</a>
+        </div>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

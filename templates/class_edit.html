@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <title>Edit Class</title>
+{% endblock %}
+{% block content %}
+<h1>Edit Class</h1>
+<form action="/class/edit" method="post">
+    <label class="left" for="name">Name:</label>
+    <input class="right" size="24" type="text" name="name" />
+    <br />
+    <label class="left">Allow Other Attributes:</label>
+    <span class="right">
+        <label for="allow_other_attributes_yes">Yes</label>
+        <input type="radio" name="allow_other_attributes" id="allow_other_attributes_yes">
+        <label for="allow_other_attributes_no">No</label>
+        <input type="radio" name="allow_other_attributes" id="allow_other_attributes_no">
+    </span>
+    <br />
+    <input class="left ui-button ui-corner-all ui-widget" type="submit">
+</form>
+{% endblock %}

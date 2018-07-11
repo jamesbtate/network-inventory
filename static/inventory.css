@@ -31,5 +31,26 @@ font-family: sans-serif
     margin-left: 160px; /* Same as the width of the sidebar */
     padding: 0px 10px;
 }
-/*blah*/
-/*blah*/
+
+form {
+    /* https://webdesign.tutsplus.com/tutorials/how-to-build-web-form-layouts-with-css-grid--cms-28776 */
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-gap: 0px;
+}
+
+.left {
+    grid-column: 1/2;
+    justify-self: start;
+    align-self: center;
+}
+
+.right {
+    grid-column: 2/3;
+    justify-self: start;
+    align-self: center;
+}
+
+/*.ui-button {
+    height: 32px;
+}*/

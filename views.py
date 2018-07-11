@@ -10,3 +10,7 @@ def hello():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/class/edit')
+def class_edit():
+    return render_template('class_edit.html')

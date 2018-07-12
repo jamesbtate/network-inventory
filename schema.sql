@@ -33,7 +33,7 @@ CREATE TABLE `class_attribute` (
   `id` bigint unsigned not null primary key,
   `class_id` bigint unsigned not null,
   `attribute_id` bigint unsigned not null,
-  `allow_other_attributes` bool not null,
+  `required` bool not null,
   KEY (`class_id`, `attribute_id`),
   FOREIGN KEY `class_fk` (`class_id`) REFERENCES `class` (`id`),
   FOREIGN KEY `attribute_fk` (`attribute_id`) REFERENCES `attribute` (`id`)

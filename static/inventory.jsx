@@ -6,7 +6,7 @@ class TextInput extends React.Component {
     render() {
         return ( [
             <label class="left" for={ this.props.name }>{ this.props.display }:</label>,
-            <input class="right" size={ this.props.size } type="text" name={ this.props.name } />,
+            <input class="right ui-corner-all ui-widget ui-widget-content" size={ this.props.size } type="text" name={ this.props.name } />,
         ] )
     }
 }
@@ -32,11 +32,19 @@ class YesNoInput extends React.Component {
         return ( [
             <label class="left">{ this.props.display }:</label>,
             <span class="right">
-                <label for={this.props.name + "_yes"}>Yes</label>
+                <label for={this.props.name + "_yes"} onClick={()=>this.props.onClick("yes")}>Yes</label>
                 <input type="radio" name={this.props.name} id={this.props.name + "_yes"} value="yes" />
-                <label for={this.props.name + "_no"}>No</label>
+                <label for={this.props.name + "_no"} onClick={()=>this.props.onClick("no")}>No</label>
                 <input type="radio" name={this.props.name} id={this.props.name + "_no"} value="no" />
             </span>
+        ] )
+    }
+}
+
+class DeleteButton extends React.Component {
+    render() {
+        return ( [
+            <span class="right ui-button ui-corner-all ui-widget delete_button" onClick={this.props.onClick}>X</span>
         ] )
     }
 }
@@ -78,13 +86,27 @@ class AttributeForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            values: []
+            values: [],
+            free_form: true,
+            nextIndex: 1
         }
         this.addValue = this.addValue.bind(this)
+        this.setFreeForm = this.setFreeForm.bind(this)
     }
     addValue() {
         this.setState({
-            values: [...this.state.values, ""]
+            values: [{index: this.state.nextIndex, value:""}, ...this.state.values],
+            nextIndex: this.state.nextIndex + 1
+        })
+    }
+    deleteValue(index) {
+        this.setState({
+            values: this.state.values.filter((_) => _.index !== index)
+        })
+    }
+    setFreeForm(value) {
+        this.setState({
+            free_form: value === "yes" ? true : false
         })
     }
     render() {
@@ -94,14 +116,17 @@ class AttributeForm extends React.Component {
                 <TextInput name="display" display="Display Name" size="24" />
                 <DescriptionInput />
                 <YesNoInput name="multi_value" display="Allow Multiple Values"/>
-                <YesNoInput name="free_form" display="Free Form"/>
-                <h3 class="left">Values</h3>
-                <div class="left" id="added_values">
-                {this.state.values.map((value, i) => (
-                    <input key={i} type="text" />
-                ))}
-                </div>
-                <input class="left ui-button ui-corner-all ui-widget" type="button" value="Add Value" onClick={this.addValue}/>
+                <YesNoInput name="free_form" display="Free Form" onClick={this.setFreeForm} />
+                { this.state.free_form ? ("") : ([
+                    <div class="left">
+                        <span class="h3">Values</span>
+                        <input class="ui-button ui-corner-all ui-widget" type="button" value="Add Value" onClick={this.addValue}/>
+                    </div>,
+                    this.state.values.map((d) => ([
+                        <input key={d.index} type="text" class="left ui-corner-all ui-widget" />,
+                        <DeleteButton onClick={()=>this.deleteValue(d.index)} />
+                    ]))
+                ])}
             </EditForm>
         )
     }

@@ -1,5 +1,6 @@
 body {
-font-family: sans-serif
+font-family: Verdana, Geneva, sans-serif;
+background-color: #eee;
 }
 
 .sidebar {
@@ -52,6 +53,33 @@ form {
     align-self: center;
 }
 
-/*.ui-button {
-    height: 32px;
-}*/
+.ui-button:not(.ui-state-active):not(:hover) {
+    background-color: #fff;
+}
+
+span.h3 {
+    margin: 10px;
+    margin-left: 0px;
+    font-weight: bold;
+    font-size: 1.17em;
+}
+
+span.delete_button {
+    height: 22px;
+    line-height: 23px;
+    width: 28px;
+    color: #fff;
+    padding: 0px;
+    text-align: center;
+}
+
+span.delete_button:not(.ui-state-active):not(:hover) {
+    background-color: #ba3030;
+}
+span.delete_button:hover {
+    background-color: #8e2323;
+    color: #fff;
+}
+span.delete_button:active {
+    border-color: #f00;
+}

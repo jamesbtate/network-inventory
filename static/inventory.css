@@ -37,6 +37,7 @@ form {
     display: grid;
     grid-template-columns: 200px 1fr;
     grid-gap: 0px;
+    grid-row-gap: 10px;
 }
 
 .left {

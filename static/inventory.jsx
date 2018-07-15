@@ -92,6 +92,8 @@ class AttributeForm extends React.Component {
         }
         this.addValue = this.addValue.bind(this)
         this.setFreeForm = this.setFreeForm.bind(this)
+        this.attributeValueChange = this.attributeValueChange.bind(this)
+        this.deleteValue = this.deleteValue.bind(this)
     }
     addValue() {
         this.setState({
@@ -109,6 +111,17 @@ class AttributeForm extends React.Component {
             free_form: value === "yes" ? true : false
         })
     }
+    attributeValueChange(e, index) {
+        // e.target.value is the new value
+        // index is the index attribute of the {} in values array
+        for (var i=0; i<this.state.values.length; i++) {
+            if (this.state.values[i].index === index) {
+                this.state.values[i].value = e.target.value;
+                this.forceUpdate();
+                break;
+            }
+        }
+    }
     render() {
         return (
             <EditForm action="/attribute/edit">
@@ -123,7 +136,7 @@ class AttributeForm extends React.Component {
                         <input class="ui-button ui-corner-all ui-widget" type="button" value="Add Value" onClick={this.addValue}/>
                     </div>,
                     this.state.values.map((d) => ([
-                        <input key={d.index} type="text" class="left ui-corner-all ui-widget" />,
+                        <input key={d.index} type="text" class="left ui-corner-all ui-widget" value={d.value} onChange={(e)=>this.attributeValueChange(e, d.index)} />,
                         <DeleteButton onClick={()=>this.deleteValue(d.index)} />
                     ]))
                 ])}

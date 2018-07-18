@@ -6,7 +6,7 @@ class TextInput extends React.Component {
     render() {
         return ( [
             <label class="left" for={ this.props.name }>{ this.props.display }:</label>,
-            <input class="right ui-corner-all ui-widget ui-widget-content" size={ this.props.size } type="text" name={ this.props.name } />,
+            <input class="right ui-corner-all ui-widget ui-widget-content" size={ this.props.size } type="text" name={ this.props.name } onChange={this.props.onChange}/>,
         ] )
     }
 }
@@ -14,7 +14,7 @@ class TextInput extends React.Component {
 class NameInput extends React.Component {
     render() {
         return (
-            <TextInput name="name" display="Name" size="24" />
+            <TextInput name="name" display="Name" size="24" onChange={this.props.onChange} />
         )
     }
 }
@@ -22,19 +22,44 @@ class NameInput extends React.Component {
 class DescriptionInput extends React.Component {
     render() {
         return (
-            <TextInput name="description" display="Description" size="48" />
+            <TextInput name="description" display="Description" size="48" onChange={this.props.onChange} />
         )
     }
 }
 
 class YesNoInput extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: this.props.name,
+            value: null,
+        };
+        this.onChange = this.onChange.bind(this);
+        this.makeEvent = this.makeEvent.bind(this);
+    }
+    onChange(value) {
+        this.setState({value: value});
+        var e = {};
+        e.target = {};
+        e.target.name = this.props.name;
+        e.target.value = value;
+        //var e = this.makeEvent();
+        this.props.onChange(e);
+    }
+    makeEvent() {
+        var e = {};
+        e.target = {};
+        e.target.name = this.state.name;
+        e.target.value = this.state.value;
+        return e;
+    }
     render() {
         return ( [
             <label class="left">{ this.props.display }:</label>,
             <span class="right">
-                <label for={this.props.name + "_yes"} onClick={()=>this.props.onClick("yes")}>Yes</label>
+                <label for={this.props.name + "_yes"} onClick={()=>this.onChange("yes")}>Yes</label>
                 <input type="radio" name={this.props.name} id={this.props.name + "_yes"} value="yes" />
-                <label for={this.props.name + "_no"} onClick={()=>this.props.onClick("no")}>No</label>
+                <label for={this.props.name + "_no"} onClick={()=>this.onChange("no")}>No</label>
                 <input type="radio" name={this.props.name} id={this.props.name + "_no"} value="no" />
             </span>
         ] )
@@ -53,9 +78,10 @@ class EditForm extends React.Component {
     render() {
         return (
             <form action={this.props.action} method="post">
+                <input type="hidden" value={this.props.id} />
                 {this.props.children}
                 <hr class="left" width="100%"/>
-                <input class="left ui-button ui-corner-all ui-widget" type="submit" />
+                <input class="left ui-button ui-corner-all ui-widget" type="submit" onClick={this.props.onSubmit}/>
             </form>
         )
     }
@@ -93,7 +119,9 @@ class AttributeForm extends React.Component {
         this.addValue = this.addValue.bind(this)
         this.setFreeForm = this.setFreeForm.bind(this)
         this.attributeValueChange = this.attributeValueChange.bind(this)
+        this.onChange = this.onChange.bind(this)
         this.deleteValue = this.deleteValue.bind(this)
+        this.submit = this.submit.bind(this);
     }
     addValue() {
         this.setState({
@@ -106,7 +134,12 @@ class AttributeForm extends React.Component {
             values: this.state.values.filter((_) => _.index !== index)
         })
     }
-    setFreeForm(value) {
+    onChange(e) {
+        console.log(e.target.name + ": " + e.target.value);
+        this.setState({ [e.target.name]: e.target.value });
+    }
+    setFreeForm(e, value) {
+        onChange(e);
         this.setState({
             free_form: value === "yes" ? true : false
         })
@@ -122,15 +155,27 @@ class AttributeForm extends React.Component {
             }
         }
     }
+    submit() {
+        var data = this.state;
+        var jqxhr = $.post('/attribute/edit', data)
+        .done(function() {
+            console.log("success");
+        })
+        .fail(function() {
+            console.log( "error" );
+        });
+
+        event.preventDefault();
+    }
     render() {
         return (
-            <EditForm action="/attribute/edit">
-                <NameInput />
-                <TextInput name="display" display="Display Name" size="24" />
-                <DescriptionInput />
-                <YesNoInput name="multi_value" display="Allow Multiple Values"/>
-                <YesNoInput name="free_form" display="Free Form" onClick={this.setFreeForm} />
-                { this.state.free_form ? ("") : ([
+            <EditForm onSubmit={this.submit}>
+                <NameInput onChange={this.onChange} />
+                <TextInput name="display" display="Display Name" size="24" onChange={this.onChange}/>
+                <DescriptionInput onChange={this.onChange} />
+                <YesNoInput name="multi_value" display="Allow Multiple Values" onChange={this.onChange} />
+                <YesNoInput name="free_form" display="Free Form" onChange={this.onChange} />
+                { this.state.free_form === true || this.state.free_form === "yes" ? ("") : ([
                     <div class="left">
                         <span class="h3">Values</span>
                         <input class="ui-button ui-corner-all ui-widget" type="button" value="Add Value" onClick={this.addValue}/>
@@ -143,12 +188,6 @@ class AttributeForm extends React.Component {
             </EditForm>
         )
     }
-}
-
-function addAttribute() {
-    // this doesn't work. need to use state to keep array of added
-    //  attributes in ClassForm
-    ReactDOM.render(<p>test</p>, document.getElementById('added_attributes'));
 }
 
 function classEditPage() {

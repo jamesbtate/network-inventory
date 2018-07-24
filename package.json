@@ -1,0 +1,32 @@
+{
+  "name": "network-inventory",
+  "version": "1.0.0",
+  "description": "Asset Management / Inventory application for network gear - MySQL (compatible) database - Python3/Flask backend - React frontend",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^3.2.0"
+  },
+  "scripts": {
+    "build": "webpack --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesbtate/network-inventory.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamesbtate/network-inventory/issues"
+  },
+  "homepage": "https://github.com/jamesbtate/network-inventory#readme"
+}

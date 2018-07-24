@@ -2,3 +2,13 @@ Asset Management / Inventory application for network gear
 - MySQL (compatible) database
 - Python3/Flask backend
 - React frontend
+
+Mostly followed the guide at [1] to setup webpack.
+
+To build:
+`npm run build`
+
+To run flask dev server:
+`./run_debug.bash`
+
+[1] (https://medium.freecodecamp.org/part-1-react-app-from-scratch-using-webpack-4-562b1d231e75)

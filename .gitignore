@@ -3,3 +3,7 @@ instance/
 __pycache__
 .*.swp
 .idea/
+node_modules/
+npm-debug.log
+*.bak
+static/bundle.js

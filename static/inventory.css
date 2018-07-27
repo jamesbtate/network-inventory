@@ -1,6 +1,70 @@
+/* Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* end reset */
+
+
+
 body {
 font-family: Verdana, Geneva, sans-serif;
 background-color: #eee;
+}
+
+div.header {
+    background-color: #2758a5;
+    color: #f1f1f1;
+    margin: 0px;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+div.header button {
+    /*float: right;*/
+}
+
+h1.title {
+    font-size: 32px;
 }
 
 .sidebar {
@@ -30,7 +94,7 @@ background-color: #eee;
 
 .content {
     margin-left: 160px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
+    padding: 0px 0px;
 }
 
 form {
@@ -39,6 +103,17 @@ form {
     grid-template-columns: 200px 1fr;
     grid-gap: 0px;
     grid-row-gap: 10px;
+    margin: 10px;
+}
+
+.align_left {
+    float: left;
+}
+.align_right {
+    float: right;
+}
+.clear_both {
+    clear: both;
 }
 
 .left {

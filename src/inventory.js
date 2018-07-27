@@ -6,6 +6,7 @@ import {NameInput} from './inputs';
 import {DescriptionInput} from './inputs';
 import {YesNoInput} from './inputs';
 import {DeleteButton} from './inputs';
+import {ListHeader} from "./misc";
 
 export class EditForm extends React.Component {
     render() {
@@ -102,24 +103,26 @@ export class AttributeForm extends React.Component {
     }
     render() {
         return (
-            <EditForm onSubmit={this.submit}>
-                <NameInput onChange={this.onChange} />
-                <TextInput name="display" display="Display Name" size="24" onChange={this.onChange}/>
-                <DescriptionInput onChange={this.onChange} />
-                <YesNoInput name="multi_value" display="Allow Multiple Values" onChange={this.onChange} />
-                <YesNoInput name="free_form" display="Free Form" onChange={this.onChange} />
-                { this.state.free_form === true || this.state.free_form === "yes" ? ("") : ([
-                    <div className="left">
-                        <span className="h3">Values</span>
-                        <input className="ui-button ui-corner-all ui-widget" type="button" value="Add Value" onClick={this.addValue}/>
-                    </div>,
-                    this.state.values.map((d) => ([
-                        <input key={d.index} type="text" className="left ui-corner-all ui-widget" value={d.value} onChange={(e)=>this.attributeValueChange(e, d.index)} />,
-                        <DeleteButton onClick={()=>this.deleteValue(d.index)} />
-                    ]))
-                ])}
-            </EditForm>
+            <div>
+                <ListHeader title="Edit Attribute" />
+                <EditForm onSubmit={this.submit}>
+                    <NameInput onChange={this.onChange} />
+                    <TextInput name="display" display="Display Name" size="24" onChange={this.onChange}/>
+                    <DescriptionInput onChange={this.onChange} />
+                    <YesNoInput name="multi_value" display="Allow Multiple Values" onChange={this.onChange} />
+                    <YesNoInput name="free_form" display="Free Form" onChange={this.onChange} />
+                    { this.state.free_form === true || this.state.free_form === "yes" ? ("") : ([
+                        <div className="left">
+                            <span className="h3">Values</span>
+                            <input className="ui-button ui-corner-all ui-widget" type="button" value="Add Value" onClick={this.addValue}/>
+                        </div>,
+                        this.state.values.map((d) => ([
+                            <input key={d.index} type="text" className="left ui-corner-all ui-widget" value={d.value} onChange={(e)=>this.attributeValueChange(e, d.index)} />,
+                            <DeleteButton onClick={()=>this.deleteValue(d.index)} />
+                        ]))
+                    ])}
+                </EditForm>
+            </div>
         )
     }
 }
-

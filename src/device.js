@@ -1,10 +1,11 @@
 import React from "react";
+import {ListHeader} from "./misc";
 
 export class Device extends React.Component {
     render() {
         return (
             <div>
-              <h2>Devices</h2>
+                <ListHeader title="Devices" addRoute="/device/edit" />
             </div>
         );
     }

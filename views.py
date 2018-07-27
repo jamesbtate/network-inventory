@@ -10,6 +10,9 @@ def hello():
 
 
 @app.route('/')
+@app.route('/class')
+@app.route('/device')
+@app.route('/attribute')
 def index():
     return render_template('index.html')
 
@@ -27,13 +30,12 @@ def class_edit():
             return "Missing required field: " + field
     return "todo: insert into db and return success"
 
-
-@app.route('/attribute')
-def attribute():
-    attributes = models.attributes()
-    if "application/json" in request.accept_mimetypes:
-        return json.dumps(attributes)
-    return "<p>unimplemented</p>"
+# @app.route('/attribute')
+# def attribute():
+#     attributes = models.attributes()
+#     if "application/json" in request.accept_mimetypes:
+#         return json.dumps(attributes)
+#     return "<p>unimplemented</p>"
 
 @app.route('/attribute/edit', methods=('GET', 'POST'))
 def attribute_edit():

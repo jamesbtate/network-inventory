@@ -11,12 +11,12 @@ import {ListHeader} from "./misc";
 export class EditForm extends React.Component {
     render() {
         return (
-            <form action={this.props.action} method="post">
+            <div className="form" action={this.props.action} method="post">
                 <input type="hidden" value={this.props.id} />
                 {this.props.children}
                 <hr className="left" width="100%"/>
-                <input className="left ui-button ui-corner-all ui-widget" type="submit" onClick={this.props.onSubmit}/>
-            </form>
+                <button className="left ui-button ui-corner-all ui-widget" onClick={this.props.onSubmit}>Submit</button>
+            </div>
         )
     }
     componentDidMount(prevProps, prevState) {
@@ -55,7 +55,7 @@ export class AttributeForm extends React.Component {
         this.attributeValueChange = this.attributeValueChange.bind(this)
         this.onChange = this.onChange.bind(this)
         this.deleteValue = this.deleteValue.bind(this)
-        this.submit = this.submit.bind(this);
+        this.submitS = this.submitS.bind(this);
     }
     addValue() {
         this.setState({
@@ -89,7 +89,7 @@ export class AttributeForm extends React.Component {
             }
         }
     }
-    submit() {
+    submitS() {
         var data = this.state;
         var jqxhr = $.post('/attribute/edit', data)
         .done(function() {
@@ -105,7 +105,7 @@ export class AttributeForm extends React.Component {
         return (
             <div>
                 <ListHeader title="Edit Attribute" />
-                <EditForm onSubmit={this.submit}>
+                <EditForm onSubmit={this.submitS}>
                     <NameInput onChange={this.onChange} />
                     <TextInput name="display" display="Display Name" size="24" onChange={this.onChange}/>
                     <DescriptionInput onChange={this.onChange} />

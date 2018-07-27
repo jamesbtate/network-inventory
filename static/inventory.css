@@ -97,7 +97,7 @@ h1.title {
     padding: 0px 0px;
 }
 
-form {
+div.form {
     /* https://webdesign.tutsplus.com/tutorials/how-to-build-web-form-layouts-with-css-grid--cms-28776 */
     display: grid;
     grid-template-columns: 200px 1fr;

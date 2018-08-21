@@ -39,8 +39,8 @@ def class_edit():
 
 @app.route('/attribute/edit', methods=('GET', 'POST'))
 def attribute_edit():
-    kwargs = {'title': 'Edit Attribute'}
+    kwargs = {}
+    kwargs['title'] = 'Edit Attribute'
     kwargs['startup_function'] = 'attributeEditPage'
     if request.method == 'GET':
-        return render_template('blank.html', **kwargs)
-    return "to-do"
+        return render_template('blank.html')

@@ -5,6 +5,31 @@ Asset Management / Inventory application for network gear
 
 Mostly followed the guide at [1] to setup webpack.
 
+To setup DB:
+Create database and user:
+```
+create database inventory;
+create user inventory@localhost identified by 'yourpassword';
+grant all on inventory.* to inventory@localhost;
+flush privileges;
+```
+`mkdir instance`
+edit instance/config.py
+```
+DB_DB = 'inventory'
+DB_HOST = 'localhost'
+DB_USER = 'inventory'
+DB_PASS = 'yourpassword'
+```
+`mysql inventory -u inventory -p < schema.sql`
+
+To setup build environment:
+```
+npm i webpack webpack-cli babel-core babel-loader babel-preset-env babel-preset-react -Dd
+npm i react react-dom react-router-dom -S
+pip3 install flask jinja2 mysql-connector
+```
+
 To build:
 `npm run build`
 

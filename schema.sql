@@ -1,5 +1,13 @@
+DROP TABLE IF EXISTS `note`;
+DROP TABLE IF EXISTS `device_attribute`;
+DROP TABLE IF EXISTS `device`;
+DROP TABLE IF EXISTS `class_attribute`;
+DROP TABLE IF EXISTS `class`;
+DROP TABLE IF EXISTS `attribute_value`;
+DROP TABLE IF EXISTS `attribute`;
+
 CREATE TABLE `attribute` (
-  `id` bigint unsigned not null primary key,
+  `id` bigint unsigned not null primary key auto_increment,
   `name` varchar(100) not null,
   `display_name` varchar(100),
   `type` varchar(100),
@@ -9,20 +17,20 @@ CREATE TABLE `attribute` (
 ) ENGINE=InnoDB;
 
 CREATE TABLE `attribute_value` (
-  `id` bigint unsigned not null primary key,
+  `id` bigint unsigned not null primary key auto_increment,
   `attribute_id` bigint unsigned not null,
   `value` varchar(100) not null,
   FOREIGN KEY `attribute_fk` (`attribute_id`) REFERENCES `attribute` (`id`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `class` (
-  `id` bigint unsigned not null primary key,
+  `id` bigint unsigned not null primary key auto_increment,
   `name` varchar(100) not null,
   `allow_other_attributes` bool not null
 ) ENGINE=InnoDB;
 
 CREATE TABLE `class_attribute` (
-  `id` bigint unsigned not null primary key,
+  `id` bigint unsigned not null primary key auto_increment,
   `class_id` bigint unsigned not null,
   `attribute_id` bigint unsigned not null,
   `required` bool not null,
@@ -32,7 +40,7 @@ CREATE TABLE `class_attribute` (
 ) ENGINE=InnoDB;
 
 CREATE TABLE `device` (
-  `id` bigint unsigned not null primary key,
+  `id` bigint unsigned not null primary key auto_increment,
   `name` varchar(100) not null,
   `class_id` bigint unsigned not null,
   `description` varchar(1000),
@@ -40,7 +48,7 @@ CREATE TABLE `device` (
 ) ENGINE=InnoDB;
 
 CREATE TABLE `device_attribute` (
-  `id` bigint unsigned not null primary key,
+  `id` bigint unsigned not null primary key auto_increment,
   `device_id` bigint unsigned not null,
   `attribute_id` bigint unsigned not null,
   `value` varchar(1000),
@@ -50,7 +58,7 @@ CREATE TABLE `device_attribute` (
 ) ENGINE=InnoDB;
 
 CREATE TABLE `note` (
-  `id` bigint unsigned not null primary key,
+  `id` bigint unsigned not null primary key auto_increment,
   `device_id` bigint unsigned not null,
   `noter` varchar(100) not null,
   `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP not null,

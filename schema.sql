@@ -1,6 +1,5 @@
 CREATE TABLE `attribute` (
   `id` bigint unsigned not null primary key,
-  `attribute_id` bigint unsigned not null,
   `name` varchar(100) not null,
   `display_name` varchar(100),
   `type` varchar(100),

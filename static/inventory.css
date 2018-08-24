@@ -92,7 +92,7 @@ h1.title {
     background-color: #2758a5;
 }
 
-.content {
+div.page {
     margin-left: 160px; /* Same as the width of the sidebar */
     padding: 0px 0px;
 }
@@ -104,6 +104,10 @@ div.form {
     grid-gap: 0px;
     grid-row-gap: 10px;
     margin: 10px;
+}
+
+div.content {
+	padding: 10px;
 }
 
 .align_left {
@@ -157,4 +161,7 @@ span.delete_button:hover {
 }
 span.delete_button:active {
     border-color: #f00;
+}
+table.data_list td {
+	border: 1px solid black;
 }

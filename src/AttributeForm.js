@@ -57,8 +57,13 @@ export class AttributeForm extends React.Component {
         }
     }
     submit() {
-        var data = this.state;
-        var jqxhr = $.post('/attribute/edit', data)
+        var data = JSON.stringify(this.state);
+        var jqxhr = $.ajax({
+            type: "POST",
+            url: '/attribute/edit',
+            data: data,
+            contentType: "application/json"
+        })
         .done(function() {
             console.log("success");
         })
@@ -74,7 +79,7 @@ export class AttributeForm extends React.Component {
                 <ListHeader title="Edit Attribute" />
                 <EditForm onSubmit={this.submit}>
                     <NameInput onChange={this.onChange} />
-                    <TextInput name="display" display="Display Name" size="24" onChange={this.onChange}/>
+                    <TextInput name="display_name" display="Display Name" size="24" onChange={this.onChange}/>
                     <DescriptionInput onChange={this.onChange} />
                     <YesNoInput name="multi_value" display="Allow Multiple Values" onChange={this.onChange} />
                     <YesNoInput name="free_form" display="Free Form" onChange={this.onChange} />

@@ -37,3 +37,17 @@ To run flask dev server:
 `./run_debug.bash`
 
 [1] (https://medium.freecodecamp.org/part-1-react-app-from-scratch-using-webpack-4-562b1d231e75)
+
+To compile/install npm in home directory on RHEL6:
+```
+wget http://nodejs.org/dist/node-latest.tar.gz
+tar xzf node-latest.tar.gz
+cd node-v*
+yum install devtoolset-6-gcc-c++
+scl enable devtoolset-6 bash
+./configure --prefix=~/opt
+make
+make install
+wget https://www.npmjs.org/install.sh -o npm_install.sh
+bash npm_install.sh
+```

@@ -36,7 +36,7 @@ export class AttributeForm extends React.Component {
         })
     }
     onChange(e) {
-        console.log(e.target.name + ": " + e.target.value);
+        // console.log(e.target.name + ": " + e.target.value);
         this.setState({ [e.target.name]: e.target.value });
     }
     setFreeForm(e, value) {

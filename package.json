@@ -4,8 +4,9 @@
   "description": "Asset Management / Inventory application for network gear - MySQL (compatible) database - Python3/Flask backend - React frontend",
   "main": "index.js",
   "dependencies": {
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "react-notifications": "^1.4.3",
     "react-router-dom": "^4.3.1",
     "webpack": "^4.16.2",
     "webpack-cli": "^3.1.0"
@@ -16,6 +17,9 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "html-webpack-plugin": "^3.2.0",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "react-router-dom": "^4.3.1",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
   },

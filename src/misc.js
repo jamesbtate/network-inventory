@@ -10,8 +10,9 @@ export class ListHeader extends React.Component {
                 { this.props.addRoute &&
                     <Link to={ this.props.addRoute }>
                         <button className="ui-button ui-corner-all ui-widget add_button align_right">
-                            <img src="/static/plus.png" />
-                            Add
+                            <span>
+                            <img src="/static/icons/plus_bright.png" />
+                            Add</span>
                         </button>
                     </Link>
                 }

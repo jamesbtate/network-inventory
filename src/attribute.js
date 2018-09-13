@@ -32,10 +32,13 @@ export class Attribute extends React.Component {
                 <ListHeader title="Attributes" addRoute="/attribute/edit" />
                 <div className="content">
                     <table className="data_list" id="attribute">
-                        <thead><tr><th>ID</th><th>Name</th><th>Description</th></tr></thead>
+                        <thead><tr><th>ID</th><th>Name</th>
+                            <th>Description</th></tr></thead>
                         <tbody>
                         {this.state.items.map((item) =>
-                            <tr key={item.id}><td>{item.id}</td><td>{item.display_name}</td>
+                            <tr key={item.id}>
+                                <td>{item.id}<img src="/static/icons/edit_16.png" /></td>
+                                <td>{item.display_name}</td>
                                 <td>{item.description}</td></tr>
                         )}
                         </tbody>

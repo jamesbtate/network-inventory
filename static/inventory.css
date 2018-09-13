@@ -44,11 +44,34 @@ table {
 }
 /* end reset */
 
+html {
+	height: 100%;
+  	box-sizing: border-box;
+}
 
+*,
+*:before,
+*:after {
+  	box-sizing: inherit;
+}
 
 body {
-font-family: Verdana, Geneva, sans-serif;
-background-color: #eee;
+	font-family: Verdana, Geneva, sans-serif;
+	background-color: #eee;
+  	height: 100%;
+}
+
+div#root {
+	min-height: 100%;
+}
+
+div#router-root {
+    position: relative;
+	padding-bottom: 54px; /* The div.footer height+padding */
+	/* This stuff below for the floating footer */
+	height: auto !important;
+	height: 100%;
+	min-height: 100vh;
 }
 
 div.header {
@@ -61,6 +84,12 @@ div.header {
 
 div.header button {
     /*float: right;*/
+	/*vertical-align: top;*/
+	/*vertical-align: middle;*/
+}
+button img {
+	vertical-align: text-top;
+	margin-right: 2px;
 }
 
 h1.title {
@@ -93,8 +122,27 @@ h1.title {
 }
 
 div.page {
+	margin: auto;
     margin-left: 160px; /* Same as the width of the sidebar */
     padding: 0px 0px;
+}
+
+div.footer {
+    margin-left: 160px; /* Same as the width of the sidebar */
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	padding: 10px;
+	height: 34px;
+	background-color: #001a44;
+	color: #e2e2e2;
+	font-size: 0.7em;
+	text-align: center;
+}
+
+div.footer a {
+	color: #ffffff;
 }
 
 div.form {
@@ -162,6 +210,10 @@ span.delete_button:hover {
 span.delete_button:active {
     border-color: #f00;
 }
-table.data_list td {
+table.data_list td, th {
 	border: 1px solid black;
+	padding: 5px;
+}
+table.data_list th {
+	font-weight: bold;
 }

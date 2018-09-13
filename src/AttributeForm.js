@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {NotificationManager} from 'react-notifications';
 
 import {EditForm} from './EditForm';
 import {TextInput} from './inputs';
@@ -66,12 +67,14 @@ export class AttributeForm extends React.Component {
         })
         .done(function() {
             console.log("success");
+            NotificationManager.success('Added Attribute.');
         })
         .fail(function() {
             console.log( "error" );
+            NotificationManager.error('Error adding attribute.');
         });
 
-        event.preventDefault();
+        //event.preventDefault();
     }
     render() {
         return (

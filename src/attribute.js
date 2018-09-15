@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {ListHeader} from "./misc";
 
 export class Attribute extends React.Component {
@@ -32,12 +33,18 @@ export class Attribute extends React.Component {
                 <ListHeader title="Attributes" addRoute="/attribute/edit" />
                 <div className="content">
                     <table className="data_list" id="attribute">
-                        <thead><tr><th>ID</th><th>Name</th>
+                        <thead><tr><th></th><th>ID</th><th>Name</th>
                             <th>Description</th></tr></thead>
                         <tbody>
                         {this.state.items.map((item) =>
                             <tr key={item.id}>
-                                <td>{item.id}<img src="/static/icons/edit_16.png" /></td>
+                                <td>
+                                    <Link to={"/attribute/edit/" + item.id}>
+                                        <img className="table_icon" src="/static/icons/edit_16.png" />
+                                    </Link>
+                                    <img className="table_icon" src="/static/icons/trash_16.png" />
+                                </td>
+                                <td>{item.id}</td>
                                 <td>{item.display_name}</td>
                                 <td>{item.description}</td></tr>
                         )}

@@ -1,7 +1,7 @@
 from flask import render_template, request, jsonify
 from inventory import app
+import mysql.connector
 import models
-import json
 
 
 @app.route('/hello')
@@ -12,7 +12,10 @@ def hello():
 @app.route('/')
 @app.route('/class')
 @app.route('/device')
-def index():
+@app.route('/<path:path>')  # catch-all route
+def index(path):
+    if '5' in path and 'edit' not in path:
+        return path, 400
     return render_template('index.html')
 
 
@@ -43,7 +46,20 @@ def attribute():
     if request_wants_json():
         attributes = models.attributes()
         return jsonify(attributes)
-    return index()
+    return index(request.path)
+
+
+@app.route('/attribute/<int:id>')
+def attribute_id(id):
+    if request_wants_json():
+        try:
+            attr = models.attribute(id)
+        except Exception as e:
+            return str(e), 500
+        if attr is None:
+            return "No such attribute", 404
+        return jsonify(attr)
+    return index(request.path)
 
 
 @app.route('/attribute/edit', methods=('GET', 'POST'))
@@ -59,10 +75,12 @@ def attribute_edit():
     if not valid:
         return output, 400
     try:
-        if 'id' in request.form:
-            models.attribute_update(output)
+        if 'id' in output:
+            models.attribute_insert(output)
         else:
             models.attribute_insert(output)
         return "success"
+    except mysql.connector.Error as e:
+        return str(e) + " " + models.query(), 500
     except Exception as e:
         return str(e), 500

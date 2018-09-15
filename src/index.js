@@ -35,7 +35,8 @@ export class Main extends React.Component {
                 <div className="page">
                     <Route exact path="/" component={Home} />
                     <Route exact path="/attribute" component={Attribute} />
-                    <Route path="/attribute/edit" component={AttributeForm} />
+                    {/* <Route exact path="/attribute/edit" component={AttributeForm} /> */}
+                    <Route path="/attribute/edit/:id?" component={AttributeForm} />
                     <Route path="/class" component={Class} />
                     <Route path="/class/edit" component={ClassForm} />
                     <Route path="/device" component={Device} />
